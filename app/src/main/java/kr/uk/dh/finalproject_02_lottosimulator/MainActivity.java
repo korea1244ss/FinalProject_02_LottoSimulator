@@ -22,6 +22,7 @@ public class MainActivity extends BaseActivity {
 
     int[] myLottoNumaArr = { 8, 5, 12,2 , 15};
     long useMoneyAmount = 0;
+    long winMoneyAmount = 0;
 
     ActivityMainBinding binding = null;
 
@@ -174,16 +175,27 @@ public class MainActivity extends BaseActivity {
 //        correctCount의 값에 따라 등수를 판정.
         if (correctCount == 6) {
 //            1등
+            winMoneyAmount += 1600000000;
         }
         else if (correctCount == 5) {
 //            2등 / 3등 재검사 필요 => 보너스 번호를 맞췄는지
         }
         else if (correctCount == 4) {
+            winMoneyAmount += 50000;
         }
         else if (correctCount == 3) {
+            useMoneyAmount -= 5000;
         }
         else {
 //            꽝!
         }
+
+
+
+
+
+//        당첨금액 텍스트에도 반영
+        binding.winMoneyTxt.setText(String.format("당첨 금액 : %,d원", winMoneyAmount));
+
     }
 }
