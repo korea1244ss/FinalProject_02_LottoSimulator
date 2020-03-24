@@ -20,6 +20,8 @@ public class MainActivity extends BaseActivity {
     int[] winLottoNumArr = new int[6];
     int bounsNum = 0;
 
+    long useMoneyAmount = 0;
+
     ActivityMainBinding binding = null;
 
     @Override
@@ -40,6 +42,9 @@ public class MainActivity extends BaseActivity {
 
 //                당첨번호를 생성 => 텍스트뷰에 반영
                 makeWinLottoNum();
+//                몇등인지 판단
+                checkLottoRank();
+
             }
         });
 
@@ -130,7 +135,7 @@ public class MainActivity extends BaseActivity {
 
             if (isDuplOk) {
                 bounsNum = randomNum;
-                break;;
+                break;
             }
 
 
@@ -141,10 +146,11 @@ public class MainActivity extends BaseActivity {
 
         }
 
+    }
+    void checkLottoRank() {
+//        돈을 천원 지불+등수 확인.
+        useMoneyAmount += 1000;
 
-
-
-
-
+        binding.useMoneyTxt.setText(String.format("사용 금액 : %,d원", useMoneyAmount));
     }
 }
