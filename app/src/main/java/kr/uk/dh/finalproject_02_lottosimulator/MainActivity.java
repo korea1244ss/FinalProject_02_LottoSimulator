@@ -115,6 +115,32 @@ public class MainActivity extends BaseActivity {
 
         }
 
+//        보너스번호 생성 => 1~45, 당첨번호 중복 X.
+
+        while (true) {
+            int randomNum = (int) (Math.random() * 45 +1);
+
+            boolean isDuplOk = true;
+            for (int winNum : winLottoNumArr) {
+                if ( winNum == randomNum) {
+                    isDuplOk = false;
+                    break;
+                }
+            }
+
+            if (isDuplOk) {
+                bounsNum = randomNum;
+                break;;
+            }
+
+
+
+//            보너스넘버 생성됨
+            binding.bounsNumber.setText(bounsNum+"");
+
+
+        }
+
 
 
 
