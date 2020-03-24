@@ -44,9 +44,21 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void setupEvents() {
+        binding.aotoBuyOneBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                while (useMoneyAmount < 10000000) {
+//                    당첨번호를 만들고 => 등수를 카운팅 반복
+                    makeWinLottoNum();
+                    checkLottoRank();
+                }
+            }
+        });
         binding.buyOneBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
 
 
 //                당첨번호를 생성 => 텍스트뷰에 반영
@@ -146,14 +158,9 @@ public class MainActivity extends BaseActivity {
                 bounsNum = randomNum;
                 break;
             }
-
-
-
-//            보너스넘버 생성됨
-            binding.bounsNumber.setText(bounsNum+"");
-
-
         }
+//            보너스넘버 생성됨
+        binding.bounsNumber.setText(bounsNum+"");
 
     }
     void checkLottoRank() {
