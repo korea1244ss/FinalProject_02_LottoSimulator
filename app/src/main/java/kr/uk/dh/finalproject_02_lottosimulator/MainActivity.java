@@ -33,6 +33,8 @@ public class MainActivity extends BaseActivity {
     int fifthRankCount = 0;
     int noRankCount = 0;
 
+    boolean isAutoLottoRunning = false;
+
     Handler mHandler = new Handler();
     Runnable buyLottoRunnable = new Runnable() {
         @Override
@@ -42,6 +44,13 @@ public class MainActivity extends BaseActivity {
                 makeWinLottoNum();
                 checkLottoRank();
 
+                if(!isAutoLottoRunning) {
+                    buyLottoLoop();
+                }
+                else{
+//                    반복구매 종료
+                }
+
                 buyLottoLoop();
             }
             else {
@@ -50,8 +59,15 @@ public class MainActivity extends BaseActivity {
         }
     };
     ActivityMainBinding binding = null;
+    void stopBuyingLotto() {
+        mHandler.removeCallbacks(buyLottoRunnable);
+        isAutoLottoRunning = false;
+        binding.aotoBuyOneBtn.setText("자동 구매 재개");
+    }
     void buyLottoLoop() {
         mHandler.post(buyLottoRunnable);
+        isAutoLottoRunning = true;
+        binding.aotoBuyOneBtn.setText("자동 구매 중단");
     }
 
 
@@ -71,7 +87,15 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
 
-                buyLottoLoop();
+                if (!isAutoLottoRunning){
+                    buyLottoLoop();
+                }
+                else{
+//                    반복구매 종료
+                    stopBuyingLotto();
+                }
+
+
             }
         });
         binding.buyOneBtn.setOnClickListener(new View.OnClickListener() {
